@@ -13,5 +13,7 @@ tCelda tablero::celdaEnPos(const tTablero& tablero, int x, int y) {
 }
 
 void tablero::ponCeldaEnPos(tTablero& tablero, int x, int y, const tCelda& c) {
-	tablero.datos[x][y] = c;
+	if ((x >= 0 && y >= 0) && (x < tablero.nFils && y < tablero.nCols )){
+		tablero.datos[x][y] = c;
+	}
 }
