@@ -1,6 +1,7 @@
 
 
 
+
 #include "celda.h"
 
 
@@ -68,4 +69,55 @@ int celda::numParedRestringida(const tCelda& c) {
 
 }
 
+bool celda::esBombilla(const tCelda& c) {
+
+	bool res;
+	if (c.tipo == BOMBILLA) {
+		res = true;
+	}
+	else {
+		res = false;
+	}
+	return res;
+}
+
+bool celda::estaApagada(const tCelda& c) {
+	bool res;
+	if ((c.tipo = LIBRE) && (c.numBombillas == 0)) {
+		res = true;
+	}
+	else {
+		res = false;
+	}
+	return res;
+}
+
+bool celda::estaIluminada(const tCelda& c) {
+
+	bool res;
+	if ((c.tipo = LIBRE) && (c.numBombillas > 0)) {
+		res = true;
+	}
+	else {
+		res = false;
+	}
+	return res;
+
+
+}
+
+void celda::apagaCelda(tCelda& c) {
+
+	c.tipo = LIBRE;
+	c.numBombillas = 0;
+}
+
+void celda::iluminaCelda(tCelda& c) {
+	c.tipo = LIBRE;
+	c.numBombillas = 1;
+}
+
+void celda::ponBombilla(tCelda& c) {
+	c.tipo = BOMBILLA;
+}
 
