@@ -1,6 +1,4 @@
-
 #include "celda.h"
-using namespace celda;
 
 
 char celda::celdaToChar(const tCelda& celda) {
@@ -8,7 +6,7 @@ char celda::celdaToChar(const tCelda& celda) {
 	if (celda.tipo == tTipo::BOMBILLA) {
 		c = bombillaChar;
 	}
-	else if ((celda.tipo == tTipo::PARED && celda.numBombillas >= 0) {
+	else if (celda.tipo == tTipo::PARED && celda.numBombillas >= 0) {
 			c = celda.numBombillas;
 	}
 }

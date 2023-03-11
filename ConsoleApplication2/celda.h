@@ -1,7 +1,7 @@
 #ifndef CELDAH
 #define CELDAH
 
-typedef enum tTipo { PARED, BOMBILLA, LIBRE };
+enum tTipo { PARED, BOMBILLA, LIBRE };
 typedef struct {
 	tTipo tipo;
 	int numBombillas;
