@@ -1,10 +1,5 @@
 #include "tablero.h"
-
 #include "colors.h"
-#include <iostream>
-#include <fstream>
-
-using namespace std;
 
 int tablero::getNumFilas(const tTablero& tab) {
 	return tab.nFils;
@@ -24,13 +19,17 @@ void tablero::ponCeldaEnPos(tTablero& tablero, int x, int y, const tCelda& c) {
 	}
 }
 
-const int HUECO = 1;
+// FIX
+const int HUECO = 2;
+
 void mostrarHeader(const tTablero& tab) {
-	cout << "\t   ";
+	cout << "\t  ";
 	for (int col = 0; col < tab.nCols; ++col) {
-		cout << "| " << col << " ";
+		cout << "|" << setw(HUECO + 1) << setfill(' ') << col;
+		cout << setw(HUECO + 1) << setfill(' ');
 	}
-	cout << "|\n";
+	cout << "|";
+	cout << endl;
 }
 
 void mostrarCoutSeparadorMat(const tTablero& tab) {
@@ -44,19 +43,30 @@ void mostrarCoutSeparadorMat(const tTablero& tab) {
 void mostrarFila(int i, const tTablero& tab) {
 	cout << "\t " << i;
 	for (int col = 0; col < tab.nCols; ++col) {
-		cout << "|" << setw(HUECO) << setfill(' ');
-		cout << celda::celdaToChar(tablero::celdaEnPos(tab, i, col));
-		cout << setw(HUECO) << setfill(' ');
+		cout << RESET << "|";
+		
+		tCelda celda = tablero::celdaEnPos(tab, i, col);
+		if (celda.tipo == BOMBILLA || (celda.tipo == LIBRE && celda.numBombillas > 0)) {
+			cout << BG_YELLOW;
+		} else if (celda.tipo == LIBRE) {
+			cout << BG_WHITE;
+		}
+	    cout << setw(HUECO + 1) << setfill(' ');
+		cout << celda::celdaToChar(celda);
+		cout << setw(HUECO + 4) << setfill(' ');
 	}
-	cout << "|\n";
+	cout << RESET << "|";
+	cout << endl;
 	mostrarCoutSeparadorMat(tab);
 }
+
 ostream& tablero::operator<<(ostream& out, const tTablero& tab) {
 	mostrarHeader(tab);
 	mostrarCoutSeparadorMat(tab);
 	for (int i = 0; i < tab.nFils; i++) {
 		mostrarFila(i, tab);
 	}
+	return out;
 }
 
 ifstream& tablero::operator>>(ifstream& archivo, tTablero& tab) {
@@ -78,5 +88,5 @@ ifstream& tablero::operator>>(ifstream& archivo, tTablero& tab) {
 		celda::ponBombilla(celda);
 		tablero::ponCeldaEnPos(tab, x, y, celda);
 	}
-
+	return archivo;
 }

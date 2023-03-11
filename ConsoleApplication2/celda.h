@@ -1,5 +1,4 @@
-#ifndef CELDAH
-#define CELDAH
+
 
 enum tTipo { PARED, BOMBILLA, LIBRE };
 typedef struct {
@@ -8,7 +7,7 @@ typedef struct {
 } tCelda;
 
 namespace celda {
-	const tCelda C_PARED = { tTipo::PARED, -1 };
+	const tCelda C_PARED = { PARED, -1 };
 	const char bombillaChar = '*';
 	const char paredChar = 'X';
 	const char libreChar = '.';
@@ -26,4 +25,3 @@ namespace celda {
 	void ponBombilla(tCelda& c);
 }
 
-#endif
