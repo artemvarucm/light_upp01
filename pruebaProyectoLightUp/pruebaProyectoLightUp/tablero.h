@@ -1,5 +1,8 @@
 #include "celda.h"
+#include <iostream>
 #include <fstream>
+#include<iomanip>
+using namespace std;
 
 const int MAX_FILS = 10;
 const int MAX_COLS = 10;
@@ -15,5 +18,5 @@ namespace tablero {
 	tCelda celdaEnPos(const tTablero& tablero, int x, int y);
 	void ponCeldaEnPos(tTablero& tablero, int x, int y, const tCelda& c);
 	ostream& operator<<(ostream& out, const tTablero& tab);
-	ifstream& operator>>(ifstream& archivo, tTablero& tab)
+	ifstream& operator>>(ifstream& archivo, tTablero& tab);
 }
