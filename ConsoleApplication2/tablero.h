@@ -1,6 +1,11 @@
+#ifndef TABLEROH
+#define TABLEROH
+
 #include "celda.h"
+#include "reglasJuego.h"
 #include <iostream>
 #include <fstream>
+#include<iomanip>
 using namespace std;
 const int MAX_FILS = 10;
 const int MAX_COLS = 10;
@@ -18,4 +23,4 @@ namespace tablero {
 	ostream& operator <<(ostream& out, const tTablero& tab);
 	ifstream& operator >>(ifstream& archivo, tTablero& tab);
 }
-
+#endif
