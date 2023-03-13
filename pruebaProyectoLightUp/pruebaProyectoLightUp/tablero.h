@@ -1,9 +1,15 @@
+
+#ifndef TABLEROH
+#define TABLEROH
+
+#include "colors.h"
 #include "celda.h"
+#include "reglasJuego.h"
 #include <iostream>
 #include <fstream>
 #include<iomanip>
-using namespace std;
 
+using namespace std;
 const int MAX_FILS = 10;
 const int MAX_COLS = 10;
 typedef tCelda tTableroDatos[MAX_FILS][MAX_COLS];
@@ -17,6 +23,24 @@ namespace tablero {
 	int getNumCols(const tTablero& tab);
 	tCelda celdaEnPos(const tTablero& tablero, int x, int y);
 	void ponCeldaEnPos(tTablero& tablero, int x, int y, const tCelda& c);
-	ostream& operator<<(ostream& out, const tTablero& tab);
-	ifstream& operator>>(ifstream& archivo, tTablero& tab);
+	ostream& operator <<(ostream& out, const tTablero& tab);
+	ifstream& operator >>(ifstream& archivo, tTablero& tab);
 }
+
+
+namespace reglasJuego {
+	bool estaTerminado(const tTablero& juego);
+
+	bool esPosQuit(int x, int y);
+
+	void ejecutarPos(tTablero& tab, int x, int y);
+}
+
+
+
+
+
+
+
+
+#endif
