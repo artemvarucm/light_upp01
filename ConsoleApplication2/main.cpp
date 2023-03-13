@@ -1,7 +1,7 @@
-#include "tablero.h"
+#include "reglasJuego.h"
 #include <fstream>
-
 using namespace tablero;
+
 int main() {
 	tTablero tablero;
 	/*tablero.nFils = 3;
@@ -18,6 +18,7 @@ int main() {
 		archivo >> tablero;
 		archivo.close();
 	}
+	reglasJuego::ejecutarPos(tablero, 1, 1);
 	cout << tablero;
 	return 0;
 }
