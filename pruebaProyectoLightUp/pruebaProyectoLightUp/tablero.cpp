@@ -83,26 +83,24 @@ void tablero::ponCeldaEnPos(tTablero& tablero, int x, int y, const tCelda& c) {
 
 
 ifstream& tablero::operator>>(ifstream& archivo, tTablero& tab){
-	archivo.open("tablero.txt");
 	
-	if (archivo.is_open()) {
-		archivo >> tab.nFils >> tab.nCols;
-		char tmp;
-		for (int i = 0; i < tab.nFils; i++) {
-			for (int j = 0; j < tab.nCols; j++) {
-				archivo >> tmp;
-				tablero::ponCeldaEnPos(tab,i, j,celda::charToCelda(tmp));
-			}
+
+	archivo >> tab.nFils >> tab.nCols;
+	char tmp;
+	for (int i = 0; i < tab.nFils; i++) {
+		for (int j = 0; j < tab.nCols; j++) {
+			archivo >> tmp;
+			tablero::ponCeldaEnPos(tab,i, j,celda::charToCelda(tmp));
 		}
-		int numBombillas, pos_i, pos_j;
-		tCelda celda;
-		celda::ponBombilla(celda);
-		archivo >> numBombillas;
-		for (int k = 0; k < numBombillas; k++) {
-			archivo >> pos_i >> pos_j;
-			tablero::ponCeldaEnPos(tab, pos_i, pos_j, celda);
-		}		
 	}
+	int numBombillas, pos_i, pos_j;
+	tCelda celda;
+	celda::ponBombilla(celda);
+	archivo >> numBombillas;
+	for (int k = 0; k < numBombillas; k++) {
+		archivo >> pos_i >> pos_j;
+		tablero::ponCeldaEnPos(tab, pos_i, pos_j, celda);
+	}		
 	
 	return archivo;
 }
