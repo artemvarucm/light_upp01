@@ -1,5 +1,5 @@
-
-
+#ifndef CELDAH
+#define CELDAH
 enum tTipo { PARED, BOMBILLA, LIBRE };
 typedef struct {
 	tTipo tipo;
@@ -25,3 +25,4 @@ namespace celda {
 	void ponBombilla(tCelda& c);
 }
 
+#endif
