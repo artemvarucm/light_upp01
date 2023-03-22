@@ -1,5 +1,7 @@
 #include "tablero.h"
 #include "colors.h"
+#include "reglasJuego.h"
+// cambiar los includes
 
 int tablero::getNumFilas(const tTablero& tab) {
 	return tab.nFils;
@@ -85,8 +87,9 @@ ifstream& tablero::operator>>(ifstream& archivo, tTablero& tab) {
 		tCelda celda;
 		int x, y;
 		archivo >> x >> y;
-		celda::ponBombilla(celda);
-		tablero::ponCeldaEnPos(tab, x, y, celda);
+		//celda::ponBombilla(celda);
+		reglasJuego::ejecutarPos(tab, x, y);
+		//tablero::ponCeldaEnPos(tab, x, y, celda);
 	}
 	return archivo;
 }

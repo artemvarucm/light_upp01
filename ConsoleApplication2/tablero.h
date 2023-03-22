@@ -2,11 +2,11 @@
 #define TABLEROH
 
 #include "celda.h"
-#include "reglasJuego.h"
 #include <iostream>
 #include <fstream>
-#include<iomanip>
+#include <iomanip>
 using namespace std;
+
 const int MAX_FILS = 10;
 const int MAX_COLS = 10;
 typedef tCelda tTableroDatos[MAX_FILS][MAX_COLS];

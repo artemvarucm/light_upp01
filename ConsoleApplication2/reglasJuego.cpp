@@ -1,5 +1,5 @@
 #include "reglasJuego.h"
-
+#include "tablero.h"
 
 bool reglasJuego::esPosQuit(int x, int y) {
 	bool ok = false;
@@ -18,7 +18,12 @@ void apagarCeldas(tTablero& tab, int x, int y) {
 		int i = x;
 		paradaDireccion = false;
 		int j = y;
-		while (i < tablero::getNumFilas(tab) && i >= 0 && j < tablero::getNumCols(tab) && j >= 0 && !paradaDireccion) {
+		while (
+			i < tablero::getNumFilas(tab) && 
+			i >= 0 && 
+			j < tablero::getNumCols(tab) && 
+			j >= 0 && 
+			!paradaDireccion) {
 			tCelda celda = tablero::celdaEnPos(tab, i, j);
 			if (celda::esPared(celda)) {
 				paradaDireccion = true;
@@ -41,23 +46,26 @@ void iluminarCeldas(tTablero& tab, int x, int y) {
 	for (int k = 0; k < 4; k++) {
 		int i = x;
 		paradaDireccion = false;
-		//while ( && !paradaDireccion) {
-			int j = y;
-			while (i < tablero::getNumFilas(tab) && i >= 0 && j < tablero::getNumCols(tab) && j >= 0 && !paradaDireccion) {
-				tCelda celda = tablero::celdaEnPos(tab, i, j);
-				if (celda::esPared(celda)) {
-					paradaDireccion = true;
-				}
-				else if(celda.tipo == LIBRE){
-					celda::iluminaCelda(celda);
-					tablero::ponCeldaEnPos(tab, i, j, celda);
-				}
-
-				j += j_offsets[k];
-				i += i_offsets[k];
+		int j = y;
+		while (
+			i < tablero::getNumFilas(tab) && 
+			i >= 0 && 
+			j < tablero::getNumCols(tab) && 
+			j >= 0 && 
+			!paradaDireccion
+			) {
+			tCelda celda = tablero::celdaEnPos(tab, i, j);
+			if (celda::esPared(celda)) {
+				paradaDireccion = true;
 			}
-			
-		//}
+			else if(celda.tipo == LIBRE){
+				celda::iluminaCelda(celda);
+				tablero::ponCeldaEnPos(tab, i, j, celda);
+			}
+
+			j += j_offsets[k];
+			i += i_offsets[k];
+		}
 	}
 }
 
