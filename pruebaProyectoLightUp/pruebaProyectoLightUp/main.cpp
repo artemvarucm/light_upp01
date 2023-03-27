@@ -12,19 +12,50 @@ int main() {
 		archivo >> tablero;
 		archivo.close();
 	}
-
-	int i, j;
-	cout << BLUE << "DONDE QUIERES PONER UNA BOMBILLA: " << "\n";
-
-	cin >> i >> j;
-	reglasJuego::ejecutarPos(tablero, i, j);
-	/*reglasJuego::ejecutarPos(tablero, 0, 0);
-		reglasJuego::ejecutarPos(tablero, 0, 2);
-		reglasJuego::ejecutarPos(tablero, 0, 4);
-		reglasJuego::ejecutarPos(tablero, 1, 3);
-		reglasJuego::ejecutarPos(tablero, 2, 0);
-		reglasJuego::ejecutarPos(tablero, 3, 1);
-		reglasJuego::ejecutarPos(tablero, 4, 3);*/
 	cout << tablero;
+	
+	int contadorJuego = 0;
+	bool bien = true;
+	int x, y;
+	while(!reglasJuego::estaTerminado(tablero) && bien) {
+		
+		cout << WHITE << "INTODUCE DONDE QUIERES COLOCAR/QUITAR UNA BOMBILLA" << "\n";
+
+		
+		cout << WHITE << "Posicion x: ";
+		cin >> x;
+		cout << WHITE << "Posicion y: ";
+		cin >> y;
+	
+		if (!reglasJuego::esPosQuit(x, y)) {
+			
+			reglasJuego::ejecutarPos(tablero, x, y);
+			cout << tablero;
+			contadorJuego++;
+			cout << "Contador: " << contadorJuego << "\n";
+
+
+
+		}
+		else {
+			bien = false;
+		}
+
+
+		cout << "\n";
+
+		
+
+	}
+	if (reglasJuego::esPosQuit(x, y)) {
+		cout << WHITE << "El juego ha acabado, has decidido abandonar." << "\n";
+	}
+	else if (reglasJuego::estaTerminado(tablero)) {
+		cout << WHITE << "HAS GANADO!!!" << "\n";
+		cout << WHITE << "Has terminado el juego en "<<contadorJuego << " movimientos"<< "\n";
+	}
+
+
+	
 	return 0;
 }
