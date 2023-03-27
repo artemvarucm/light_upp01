@@ -13,7 +13,7 @@ int main() {
 		}
 	}*/
 	ifstream archivo;
-	archivo.open("./tableros.txt");
+	archivo.open("./tableros.txt");		//DEPENDE DEL ARCHIVO.TXT Y SU NOMBRE
 	if (archivo.is_open()) {
 		archivo >> tablero;
 		archivo.close();
