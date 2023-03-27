@@ -1,123 +1,68 @@
-
-
-
-
 #include "celda.h"
 
-
-const char ASTERISCO = '*', BLANCO = ' ';
-
 char celda::celdaToChar(const tCelda& celda) {
-
-	char resultado;
-
+	char c = resto;
 	if (celda.tipo == BOMBILLA) {
-		resultado = ASTERISCO;
+		c = bombillaChar;
 	}
-	else if ((celda.tipo == PARED) && celda.numBombillas >= 0) {
-		resultado = char(int('0') + celda.numBombillas);
+	else if (celda.tipo == PARED && celda.numBombillas >= 0) {
+		c = char(int('0') + celda.numBombillas);
 	}
-	else{
-		resultado = BLANCO;
-	}
-	return resultado;
-
+	return c;
 }
 
 tCelda celda::charToCelda(char c) {
-	tCelda resultado;
-	if (c == 'X') {
-		resultado.tipo = PARED;
-		resultado.numBombillas = -1;
+	tCelda celda;
+	celda.numBombillas = 0;
+	switch (c) {
+	case paredChar: {
+		celda = C_PARED;
+		celda.numBombillas = -1;
+	}
+				  break;
+	case libreChar:
+		celda.tipo = LIBRE;
+		break;
+	case bombillaChar:
+		celda.tipo = BOMBILLA;
+		break;
+	default:
+		// validar si es int
+		celda.tipo = PARED;
+		celda.numBombillas = int(c - '0');
+	}
+	return celda;
 
-	}
-	else if (c == '.') {
-		resultado.tipo = LIBRE;
-	}
-	else if (c == ASTERISCO) {
-		resultado.tipo = BOMBILLA;
-	}
-	else {
-		resultado.tipo = PARED;
-		resultado.numBombillas = int(c - '0');
-	}
-	return resultado;
 }
-
 bool celda::esPared(const tCelda& c) {
-
-	if (c.tipo == PARED){
-		return true;
-	}
-	else {
-		return false;
-	}
+	return c.tipo == PARED;
 }
-
-bool celda::esParedRestringida(const tCelda& c) {
-	if ((c.tipo == PARED) && c.numBombillas != -1) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}
-
 int celda::numParedRestringida(const tCelda& c) {
-
+	// CAMBIAR
 	return c.numBombillas;
-
+}
+bool celda::esParedRestringida(const tCelda& c) {
+	return c.tipo == PARED && c.numBombillas >= 0;
 }
 
 bool celda::esBombilla(const tCelda& c) {
-
-	bool res;
-	if (c.tipo == BOMBILLA) {
-		res = true;
-	}
-	else {
-		res = false;
-	}
-	return res;
+	return c.tipo == BOMBILLA;
 }
-
 bool celda::estaApagada(const tCelda& c) {
-	bool res;
-	if ((c.tipo = LIBRE) && (c.numBombillas == 0)) {
-		res = true;
-	}
-	else {
-		res = false;
-	}
-	return res;
+	return c.tipo == LIBRE && c.numBombillas == 0;
 }
-
 bool celda::estaIluminada(const tCelda& c) {
-
-	bool res;
-	if ((c.tipo = LIBRE) && (c.numBombillas > 0)) {
-		res = true;
-	}
-	else {
-		res = false;
-	}
-	return res;
-
-
+	return c.tipo == LIBRE && c.numBombillas >= 0;
 }
-
 void celda::apagaCelda(tCelda& c) {
-
 	c.tipo = LIBRE;
 	c.numBombillas = 0;
 }
-
 void celda::iluminaCelda(tCelda& c) {
+	// CAMBIAR
 	c.tipo = LIBRE;
 	c.numBombillas = 1;
 }
-
 void celda::ponBombilla(tCelda& c) {
 	c.tipo = BOMBILLA;
 }
-
