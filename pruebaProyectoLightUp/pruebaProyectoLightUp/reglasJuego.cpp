@@ -71,24 +71,28 @@ void iluminarCeldas(tTablero& tab, int x, int y) {
 
 void reglasJuego::ejecutarPos(tTablero& tab, int x, int y) {
 	// validar no se sale tamanio
-	if (!esPosQuit(x, y)) {
-		tCelda celda = tablero::celdaEnPos(tab, x, y);
-		if (celda::esBombilla(celda)) {
-			celda::apagaCelda(celda);
-			tablero::ponCeldaEnPos(tab, x, y, celda);
-			apagarCeldas(tab, x, y);
-		}
-		else if (celda::estaApagada(celda)) {
-			celda::ponBombilla(celda);
-			tablero::ponCeldaEnPos(tab, x, y, celda);
-			iluminarCeldas(tab, x, y);
-
-		}
+	
+	tCelda celda = tablero::celdaEnPos(tab, x, y);
+	if (celda::esBombilla(celda)) {
+		celda::apagaCelda(celda);
+		tablero::ponCeldaEnPos(tab, x, y, celda);
+		apagarCeldas(tab, x, y);
+	}
+	else if (celda::estaApagada(celda)) {
+		celda::ponBombilla(celda);
+		tablero::ponCeldaEnPos(tab, x, y, celda);
+		iluminarCeldas(tab, x, y);
 
 	}
+	else if (celda::estaIluminada(celda)) {
+		cout << "\n";
+		cout << "No se puede colocar una bombilla en esa posicion porque ya esta iluminada." << "\n";
+		cout << "Prueba a quitar antes la bombilla que esta iluminando esa casilla." << "\n";
+		cout << "\n";
+	}
+	
 
 }
-
 
 int comprobarParedRestringida(const tTablero& tab, int x, int y) {
 	int cont = 0;
@@ -111,7 +115,7 @@ bool reglasJuego::estaTerminado(tTablero const& juego) {
 	bool ok = true;
 	tCelda celda;
 	while (x < juego.nFils && ok) {
-
+		y = 0;
 		while (y < juego.nCols && ok) {
 
 			celda = tablero::celdaEnPos(juego, x, y);
@@ -131,5 +135,6 @@ bool reglasJuego::estaTerminado(tTablero const& juego) {
 
 
 }
+
 
 
