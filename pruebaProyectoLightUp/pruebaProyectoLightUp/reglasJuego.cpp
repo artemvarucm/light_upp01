@@ -1,6 +1,5 @@
-/*
 #include "reglasJuego.h"
-
+#include "tablero.h"
 
 bool reglasJuego::esPosQuit(int x, int y) {
 	bool ok = false;
@@ -19,7 +18,12 @@ void apagarCeldas(tTablero& tab, int x, int y) {
 		int i = x;
 		paradaDireccion = false;
 		int j = y;
-		while (i < tablero::getNumFilas(tab) && i >= 0 && j < tablero::getNumCols(tab) && j >= 0 && !paradaDireccion) {
+		while (
+			i < tablero::getNumFilas(tab) &&
+			i >= 0 &&
+			j < tablero::getNumCols(tab) &&
+			j >= 0 &&
+			!paradaDireccion) {
 			tCelda celda = tablero::celdaEnPos(tab, i, j);
 			if (celda::esPared(celda)) {
 				paradaDireccion = true;
@@ -42,9 +46,14 @@ void iluminarCeldas(tTablero& tab, int x, int y) {
 	for (int k = 0; k < 4; k++) {
 		int i = x;
 		paradaDireccion = false;
-		//while ( && !paradaDireccion) {
 		int j = y;
-		while (i < tablero::getNumFilas(tab) && i >= 0 && j < tablero::getNumCols(tab) && j >= 0 && !paradaDireccion) {
+		while (
+			i < tablero::getNumFilas(tab) &&
+			i >= 0 &&
+			j < tablero::getNumCols(tab) &&
+			j >= 0 &&
+			!paradaDireccion
+			) {
 			tCelda celda = tablero::celdaEnPos(tab, i, j);
 			if (celda::esPared(celda)) {
 				paradaDireccion = true;
@@ -57,8 +66,6 @@ void iluminarCeldas(tTablero& tab, int x, int y) {
 			j += j_offsets[k];
 			i += i_offsets[k];
 		}
-
-		//}
 	}
 }
 
@@ -66,40 +73,19 @@ void reglasJuego::ejecutarPos(tTablero& tab, int x, int y) {
 	// validar no se sale tamanio
 	if (!esPosQuit(x, y)) {
 		tCelda celda = tablero::celdaEnPos(tab, x, y);
-		if (celda::estaIluminada(celda)) {
-			cout << "LA CELDA YA ESTA ILUMINADA, NO SE PUEDE PONER UNA BOMBILLA" << "\n";
+		if (celda::esBombilla(celda)) {
+			celda::apagaCelda(celda);
+			tablero::ponCeldaEnPos(tab, x, y, celda);
+			apagarCeldas(tab, x, y);
 		}
-		else if (celda::esPared(celda)) {
-			cout << "LA CELDA ES UNA PARED" << "\n";
-		}
-		else {
-			if (celda::esBombilla(celda)) {
-				celda::apagaCelda(celda);
-				tablero::ponCeldaEnPos(tab, x, y, celda);
-				apagarCeldas(tab, x, y);
-			}
-			else if (celda::estaApagada(celda)) {
-				celda::ponBombilla(celda);
-				tablero::ponCeldaEnPos(tab, x, y, celda);
-				iluminarCeldas(tab, x, y);
+		else if (celda::estaApagada(celda)) {
+			celda::ponBombilla(celda);
+			tablero::ponCeldaEnPos(tab, x, y, celda);
+			iluminarCeldas(tab, x, y);
 
-			}
 		}
 
 	}
 
 }
-/*
-bool reglasJuego::estaTerminado(const tTablero& juego) {
-
-
-
-
-
-
-
-
-}
-
-*/
 
