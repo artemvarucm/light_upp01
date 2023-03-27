@@ -52,7 +52,7 @@ bool celda::estaApagada(const tCelda& c) {
 	return c.tipo == LIBRE && c.numBombillas == 0;
 }
 bool celda::estaIluminada(const tCelda& c) {
-	return c.tipo == LIBRE && c.numBombillas >= 0;
+	return c.tipo == LIBRE && c.numBombillas > 0;
 }
 void celda::apagaCelda(tCelda& c) {
 	c.tipo = LIBRE;
