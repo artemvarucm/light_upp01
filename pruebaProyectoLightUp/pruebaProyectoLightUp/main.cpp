@@ -12,6 +12,8 @@ int main() {
 		archivo >> tablero;
 		archivo.close();
 	}
+	cout << WHITE<< "\n" << "\n" <<"\t" << "     " << "JUEGO LIGHT-UP" << "\n" << "\n";
+
 	cout << tablero;
 	
 	int contadorJuego = 0;
