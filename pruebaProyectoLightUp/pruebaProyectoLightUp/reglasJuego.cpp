@@ -89,3 +89,47 @@ void reglasJuego::ejecutarPos(tTablero& tab, int x, int y) {
 
 }
 
+
+int comprobarParedRestringida(const tTablero& tab, int x, int y) {
+	int cont = 0;
+	for (int k = 0; k < 4; k++) {
+		int i = x + i_offsets[k];
+		int j = y + j_offsets[k];
+
+		if ((tab.datos[i][j].tipo == BOMBILLA) && i >= 0 && i < tab.nFils && j >= 0 && j < tab.nCols) {
+			cont++;
+		}
+
+	}
+	return cont;
+}
+
+
+bool reglasJuego::estaTerminado(tTablero const& juego) {
+	int x = 0;
+	int y = 0;
+	bool ok = true;
+	tCelda celda;
+	while (x < juego.nFils && ok) {
+
+		while (y < juego.nCols && ok) {
+
+			celda = tablero::celdaEnPos(juego, x, y);
+			if (celda::esParedRestringida(celda) && (celda::numParedRestringida(celda) != comprobarParedRestringida(juego,x,y))) {
+				ok = false;
+			}
+			else if (!celda::esPared(celda) && (!celda::esBombilla(celda) && !celda::estaIluminada(celda))) {
+				ok = false;
+			}
+			y++;
+		}
+
+		x++;
+	}
+	
+	return ok;
+
+
+}
+
+
