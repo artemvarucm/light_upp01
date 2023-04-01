@@ -1,7 +1,5 @@
 #include "tablero.h"
-
 #include "reglasJuego.h"
-// cambiar los includes
 
 int tablero::getNumFilas(const tTablero& tab) {
 	return tab.nFils;
@@ -82,6 +80,9 @@ void mostrarTablero(const tTablero& tab) {
 }
 
 ostream& tablero::operator<<(ostream& out, const tTablero& tab) {
+	/*
+	* Sobrecarga del operador << para mostrar el tablero
+	*/
 	mostrarCabecera(tab.nCols);
 	mostrarTablero(tab);
 	return out;
@@ -89,6 +90,9 @@ ostream& tablero::operator<<(ostream& out, const tTablero& tab) {
 }
 
 ifstream& tablero::operator>>(ifstream& archivo, tTablero& tab) {
+	/*
+	* Sobrecarga del extractor >> para cargar el tablero
+	*/
 	archivo >> tab.nFils >> tab.nCols;
 	for (int i = 0; i < tab.nFils; i++) {
 		for (int j = 0; j < tab.nCols; j++){
@@ -104,9 +108,8 @@ ifstream& tablero::operator>>(ifstream& archivo, tTablero& tab) {
 		tCelda celda;
 		int x, y;
 		archivo >> x >> y;
-		//celda::ponBombilla(celda);
+		// Reutilizamos funcion, que ya esta definida en el modulo reglasJuego
 		reglasJuego::ejecutarPos(tab, x, y);
-		//tablero::ponCeldaEnPos(tab, x, y, celda);
 	}
 	return archivo;
 }

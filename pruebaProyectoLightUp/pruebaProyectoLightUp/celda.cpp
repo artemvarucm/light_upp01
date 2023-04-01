@@ -1,6 +1,9 @@
 #include "celda.h"
 
 char celda::celdaToChar(const tCelda& celda) {
+	/*
+	* Convierte la celda en char para mostrarla
+	*/
 	char c = resto;
 	if (celda.tipo == BOMBILLA) {
 		c = bombillaChar;
@@ -12,14 +15,17 @@ char celda::celdaToChar(const tCelda& celda) {
 }
 
 tCelda celda::charToCelda(char c) {
+	/*
+	* Convierte de char a celda. Se usa para cargar un tablero existente.
+	*/
 	tCelda celda;
 	celda.numBombillas = 0;
 	switch (c) {
 	case paredChar: {
 		celda = C_PARED;
 		celda.numBombillas = -1;
-	}
-				  break;
+		}
+		break;
 	case libreChar:
 		celda.tipo = LIBRE;
 		break;
@@ -59,9 +65,8 @@ void celda::apagaCelda(tCelda& c) {
 	c.numBombillas = 0;
 }
 void celda::iluminaCelda(tCelda& c) {
-	// CAMBIAR
 	c.tipo = LIBRE;
-	c.numBombillas = 1;
+	c.numBombillas++;
 }
 void celda::ponBombilla(tCelda& c) {
 	c.tipo = BOMBILLA;
