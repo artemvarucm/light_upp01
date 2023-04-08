@@ -1,4 +1,10 @@
+/*
+1ºD 
+Grado Ingeniería de Datos e Inteligencia Artificial
 
+DANIEL COLETO QUEREDA 
+ARTEM VARTANOV
+*/
 #include "reglasJuego.h"
 #include <fstream>
 using namespace tablero;
