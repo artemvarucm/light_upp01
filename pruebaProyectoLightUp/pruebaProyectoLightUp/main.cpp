@@ -16,7 +16,6 @@ int main() {
 	if (archivo.is_open()) {
 		archivo >> tablero;
 		archivo.close();
-	
 
 		cout << tablero;
 

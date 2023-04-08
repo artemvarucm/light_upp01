@@ -33,7 +33,6 @@ tCelda celda::charToCelda(char c) {
 		celda.tipo = BOMBILLA;
 		break;
 	default:
-		// validar si es int
 		celda.tipo = PARED;
 		celda.numBombillas = int(c - '0');
 	}
@@ -44,7 +43,6 @@ bool celda::esPared(const tCelda& c) {
 	return c.tipo == PARED;
 }
 int celda::numParedRestringida(const tCelda& c) {
-	// CAMBIAR
 	return c.numBombillas;
 }
 bool celda::esParedRestringida(const tCelda& c) {

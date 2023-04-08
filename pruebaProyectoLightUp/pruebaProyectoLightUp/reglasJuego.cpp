@@ -106,8 +106,8 @@ void reglasJuego::ejecutarPos(tTablero& tab, int x, int y) {
 		}
 	} else {
 		cout << "\n";
-		cout << "Posicion no valida (x entre (0, " << tablero::getNumFilas(tab) - 1 << "); "; 
-		cout << "y entre (0, " << tablero::getNumCols(tab) - 1 << ")\n";
+		cout << "Posicion no valida (x entre [0, " << tablero::getNumFilas(tab) - 1 << "]; "; 
+		cout << "y entre [0, " << tablero::getNumCols(tab) - 1 << "]\n";
 		cout << "\n";
 	}
 }
@@ -120,7 +120,7 @@ int comprobarParedRestringida(const tTablero& tab, int x, int y) {
 		int i = x + I_OFFSETS[k];
 		int j = y + J_OFFSETS[k];
 
-		if ((tab.datos[i][j].tipo == BOMBILLA) && i >= 0 && i < tab.nFils && j >= 0 && j < tab.nCols) {
+		if ((tablero::celdaEnPos(tab, i, j).tipo == BOMBILLA) && i >= 0 && i < tablero::getNumFilas(tab) && j >= 0 && j < tablero::getNumCols(tab)) {
 			cont++;
 		}
 	}
@@ -134,9 +134,9 @@ bool reglasJuego::estaTerminado(tTablero const& juego) {
 	int y = 0;
 	bool ok = true;
 	tCelda celda;
-	while (x < juego.nFils && ok) {
+	while (x < tablero::getNumFilas(juego) && ok) {
 		y = 0;
-		while (y < juego.nCols && ok) {
+		while (y < tablero::getNumCols(juego) && ok) {
 			celda = tablero::celdaEnPos(juego, x, y);
 			if (celda::esParedRestringida(celda) && (celda::numParedRestringida(celda) != comprobarParedRestringida(juego,x,y))) {
 				ok = false;

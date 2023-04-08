@@ -19,7 +19,6 @@ void tablero::ponCeldaEnPos(tTablero& tablero, int x, int y, const tCelda& c) {
 	}
 }
 
-// FIX
 const int HUECOS = 2;
 const int N = 5;
 
@@ -49,20 +48,21 @@ void mostrarFila(const tTablero& tab, int i, int N) {
 	cout << "\t" << LBLUE << setw(HUECOS) << i << RESET << '|';
 	for (int c = 0; c < N; c++) {
 		char cel;
-		if ((tab.datos[i][c].tipo == BOMBILLA) || (tab.datos[i][c].tipo == LIBRE && tab.datos[i][c].numBombillas > 0 && tab.datos[i][c].numBombillas < 5)) {
+		tCelda celda = tablero::celdaEnPos(tab, i, c);
+		if ((celda.tipo == BOMBILLA) || (celda.tipo == LIBRE && celda.numBombillas > 0 && celda.numBombillas < 5)) {
 			cout << BG_YELLOW << BLACK;
 		}
-		else if ((tab.datos[i][c].tipo == LIBRE) && (tab.datos[i][c].numBombillas <= 0 || tab.datos[i][c].numBombillas >= 5)) {
+		else if ((celda.tipo == LIBRE) && (celda.numBombillas <= 0 || celda.numBombillas >= 5)) {
 			cout << BG_WHITE;
 		}
-		else if ((tab.datos[i][c].tipo == PARED) && (tab.datos[i][c].numBombillas >= 0 && tab.datos[i][c].numBombillas < 5)) {
+		else if ((celda.tipo == PARED) && (celda.numBombillas >= 0 && celda.numBombillas < 5)) {
 			cout << BG_BLACK << WHITE;
 		}
 		else {
 			cout << BG_BLACK;
 		}
 
-		cel = celda::celdaToChar(tab.datos[i][c]);
+		cel = celda::celdaToChar(celda);
 		cout << setw(HUECOS) << setfill(' ') << cel << " " << RESET;
 		cout << '|';
 	}
