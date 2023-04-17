@@ -18,7 +18,7 @@ namespace listaTableros {
 
 	void inicializaVectorTablero(tListaTableros& losTableros);
 
-	bool hayTableroNivel(tListaTableros const& losTableros, int nivel);
+	bool hayTableroNivel(tListaTableros const& losTableros, int nivel, int& posNivel);
 
 	tPtrTablero dameTableroNivel(tListaTableros const& losTableros, int nivel);
 
