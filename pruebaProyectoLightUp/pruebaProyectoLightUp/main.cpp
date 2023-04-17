@@ -2,29 +2,33 @@
 1ºD 
 Grado Ingeniería de Datos e Inteligencia Artificial
 
-DANIEL COLETO QUEREDA 
+DANIEL COLETO QUEREDA
 ARTEM VARTANOV
 */
 #include "reglasJuego.h"
+#include "listaTableros.h"
 #include <fstream>
-using namespace tablero;
 
+using namespace tablero;
+//const string FILENAME = "tablero.txt";
 int main() {
 	
 	cout << WHITE << "\n" << "\n" << "\t" << "     " << "JUEGO LIGHT-UP" << "\n" << "\n";
-	tTablero tablero;
+	tListaTableros tableros;
 	ifstream archivo;
-
+	listaTableros::inicializaVectorTablero(tableros);
 	cout << WHITE << "Introduce el archivo para cargar partida: ";
-	string filename;
-	getline(cin, filename);
-	archivo.open(filename);
+	string FILENAME;
+	getline(cin, FILENAME);
+	
+	archivo.open(FILENAME);
 	if (archivo.is_open()) {
-		archivo >> tablero;
+		listaTableros::operator>>(archivo, tableros);
 		archivo.close();
 
-		cout << tablero;
-
+		
+		listaTableros::operator<<(cout, tableros);
+/*
 		int contadorJuego = 0;
 		bool bien = true;
 		// Ciclo de vida del juego
@@ -51,10 +55,9 @@ int main() {
 		if (reglasJuego::estaTerminado(tablero)) {
 			cout << WHITE << "HAS GANADO!!!" << "\n";
 			cout << WHITE << "Has terminado el juego en " << contadorJuego << " movimientos" << "\n";
-		}
+		}*/
 	} else {
 		cout << "Archivo no se pudo abrir. Revise si el nombre del archivo esta escrito correctamente\n";
 	}
 
 	return 0;
-}
