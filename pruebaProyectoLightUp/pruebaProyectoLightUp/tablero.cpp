@@ -9,6 +9,10 @@ int tablero::getNumCols(const tTablero& tab) {
 	return tab.nCols;
 }
 
+int tablero::getNivel(const tTablero& tab) {
+	return tab.nivel;
+}
+
 tCelda tablero::celdaEnPos(const tTablero& tablero, int x, int y) {
 	return tablero.datos[x][y];
 }
