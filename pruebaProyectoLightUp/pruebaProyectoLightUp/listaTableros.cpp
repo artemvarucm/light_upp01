@@ -26,6 +26,14 @@ istream& listaTableros::operator>> (ifstream& in, tListaTableros& losTableros) {
 	return in;
 }
 
+ostream& listaTableros::operator<< (ostream& out, tListaTableros const& losTableros) {
+	for (int i = 0; i < losTableros.nElem; i++) {
+		cout << "\n\n";
+		tablero::operator<<(out, *losTableros.datos[i]);
+	}
+	return out;
+}
+
 void listaTableros::insertarOrdTablero(tListaTableros& losTableros, tPtrTablero const& elTablero) {
 	if (losTableros.nElem < MAX_TABLEROS) {
 		int nivTab = tablero::getNivel(*elTablero);
@@ -45,4 +53,51 @@ void listaTableros::insertarOrdTablero(tListaTableros& losTableros, tPtrTablero 
 		cout << "Lista Llena\n";
 	}
 
+}
+
+
+tPtrTablero listaTableros::dameTableroNivel(tListaTableros const& losTableros, int nivel) {
+	int posNivel;
+	tPtrTablero tabNiv = NULL;
+	if (listaTableros::hayTableroNivel(losTableros, nivel, posNivel)) {
+		tabNiv = losTableros.datos[posNivel];
+	}
+	return tabNiv;
+}
+
+
+tPtrTablero listaTableros::dameTableroSigNivel(tListaTableros const& losTableros, int nivel) {
+	int posNivel;
+	tPtrTablero tabNiv = NULL;
+	if (listaTableros::hayTableroNivel(losTableros, nivel, posNivel) && ((posNivel + 1) < losTableros.nElem)) {
+		tabNiv = losTableros.datos[posNivel + 1];
+	}
+	return tabNiv;
+}
+
+
+
+bool listaTableros::hayTableroNivel(tListaTableros const& losTableros, int nivel, int& posNivel) {
+	int ini, fin, mitad;
+	bool encontrado = false;
+	while (!encontrado && ini <= fin) {
+		mitad = (ini + fin) / 2;
+		if (tablero::getNivel(*losTableros.datos[mitad]) == nivel) {
+			encontrado = true;
+		} else if (tablero::getNivel(*losTableros.datos[mitad]) < nivel) {
+			ini = mitad + 1;
+		} else {
+			fin = mitad - 1;
+		}
+		
+	}
+	posNivel = mitad;
+	return encontrado;
+}
+
+void deleteListaTablero(tListaTableros& losTableros) {
+	for (int i = 0; i < losTableros.nElem; i++) {
+		delete losTableros.datos[i];
+	}
+	losTableros.nElem = 0;
 }
