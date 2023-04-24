@@ -11,7 +11,17 @@ bool reglasJuego::esPosQuit(int x, int y) {
 	if (x == -1 && y == 0) {
 		ok = true;
 	}
+	 
 	return ok;
+}
+
+bool reglasJuego::esPosReset(int x, int y) {
+	bool ok = false;
+	if (x == -1 && y == -1) {
+		ok = true;
+	}
+	return ok;
+
 }
 
 void apagarCeldas(tTablero& tab, int x, int y) {
@@ -154,3 +164,16 @@ bool reglasJuego::estaTerminado(tTablero const& juego) {
 
 
 
+void reglasJuego::resetTablero(tTablero& tab) {
+	tCelda celda;
+	for (int i = 0; i < tablero::getNumFilas(tab); i++) {
+		for (int j = 0; j < tablero::getNumCols(tab); j++) {
+			celda = tablero::celdaEnPos(tab, i, j);
+			if (!celda::esPared(celda)) {
+				celda::apagaCelda(celda);
+				tablero::ponCeldaEnPos(tab, i, j, celda);
+			}
+		}
+	}
+	
+}
