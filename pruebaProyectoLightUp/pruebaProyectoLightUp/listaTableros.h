@@ -20,7 +20,7 @@ namespace listaTableros {
 
 	bool hayTableroNivel(tListaTableros const& losTableros, int nivel, int& posNivel);
 
-	tPtrTablero dameTableroNivel(tListaTableros const& losTableros, int nivel);
+	tPtrTablero dameTableroNivel(tListaTableros const& losTableros, int nivel, int& posNivel);
 
 	tPtrTablero dameTableroSigNivel(tListaTableros const& losTableros, int nivel);
 
@@ -32,3 +32,4 @@ namespace listaTableros {
 }
 
 #endif
+
