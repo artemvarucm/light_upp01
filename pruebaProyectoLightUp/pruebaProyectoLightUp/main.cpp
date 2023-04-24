@@ -80,13 +80,13 @@ int main() {
 		if (!salir) {
 			cout << "\nHAS COMPLETADO TODOS LOS NIVELES A PARTIR DEL NIVEL " << niv << "!\n";
 		}
-
-
+		listaTableros::deleteListaTablero(tableros);
+		//funcion que si has dejado memoria libre en dinamica
 	}
 	else {
 		cout << "Archivo no se pudo abrir. Revise si el nombre del archivo esta escrito correctamente\n";
 	}
-
+	
 	return 0;
 
 }
